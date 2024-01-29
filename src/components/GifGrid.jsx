@@ -4,33 +4,13 @@ import { useEffect, useState } from 'react';
 /* Importaciones de terceros */
 
 /* Nuestro codigo */
-import { getGifs } from '../helpers/getGifs';
+//import { getGifs } from '../helpers/getGifs';
 import { GifItem } from './GifItem';
+import { useFetchGifs } from '../hooks/useFetchGifs';
 
 export const GifGrid = ({ category }) => {
 
-    const [images, setImages] = useState([]);
-
-    /* @param deps — If present, effect will only activate if the values in the list change. */
-    /*useEffect(() => {
-        getGifs(category);
-    }, []);*/
-
-    /* Primera forma */
-    /*useEffect( () => {
-        getGifs(category)
-            .then( newImages => setImages(newImages) );
-    })*/
-
-    /* Segunda forma */
-    const getImages = async() => {
-        const newImages = await getGifs(category);
-        setImages(newImages);
-    };
-
-    useEffect( () => {
-        getImages();
-    }, []);
+    const { images, isLoading } = useFetchGifs( category );
 
     return (
         <>
